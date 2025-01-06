@@ -1,0 +1,192 @@
+{% extends "layout.twig" %}
+
+{% block title %}
+    {{ parent() }} - {{ data.error ? 'Request failed ' ~ data.status.code|escape : 'Request went through' }}
+{% endblock %}
+{% block content %}
+    <div class="console-header">
+        <div class="console-title">{% if data.error %}Error Report{% else %}System Status{% endif %}</div>
+        <div class="console-meta">
+            <span class="trace-id">Trace: {{ data.trace_id|escape }}</span>
+        </div>
+    </div>
+
+    <div class="console-body">
+        <section class="status-section">
+            <div class="status-header">
+                <h2>Request Status</h2>
+            </div>
+
+            <!-- Main Status Grid -->
+            <div class="status-grid">
+                <div class="status-item {% if data.error %}error{% endif %}">
+                    <div class="status-item-header">Status</div>
+                    <div class="status-item-value">
+                        {% if data.status.code >= 200 and data.status.code < 300 %}
+                            <span class="status-badge">Success</span>
+                        {% else %}
+                            <span class="status-badge status-badge-error">Error {{ data.status.code }} ({{ data.status.message|escape }})</span>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">Method</div>
+                    <div class="status-item-value">{{ data.request.method|escape }}</div>
+                </div>
+            </div>
+            {% if data.error %}
+
+                <div class="status-grid">
+                    <div class="status-item {% if data.error %}error{% endif %}">
+                        <div class="status-item-header">Error Details</div>
+                        <div class="status-item-value">
+                            <div class="error-content">
+                                <div class="error-detail-item">
+                                    <span class="error-label">Type</span>
+                                    <span class="error-value">{{ data.error.type|escape }}</span>
+                                </div>
+                                <div class="error-detail-item">
+                                    <span class="error-label">Location</span>
+                                    <span class="error-value">{{ data.error.file|escape }}:{{ data.error.line }}</span>
+                                </div>
+
+                                {% if data.error.trace %}
+                                    <div class="error-stack">
+                                        <div class="error-label">Stack Trace</div>
+                                        {% for trace in data.error.trace %}
+                                            <div class="error-trace-item">
+                                                {% if trace.file %}
+                                                    <div class="trace-location">{{ trace.file|escape }}
+                                                        :{{ trace.line }}</div>
+                                                {% endif %}
+                                                {% if trace.class %}
+                                                    <div class="trace-call">{{ trace.class|escape }}{{ trace.type|escape }}{{ trace.function|escape }}</div>
+                                                {% else %}
+                                                    <div class="trace-call">{{ trace.function|escape }}</div>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            {% endif %}
+
+            <!-- Dedicated URL Section -->
+            <div class="url-section">
+                <div class="url-header">Request URL</div>
+                <div class="url-content">{{ data.request.uri|escape }}</div>
+            </div>
+
+
+            <div class="query-params-section">
+                <!-- Query Parameters Section -->
+                {% if data.request.query %}
+                    <div class="query-params-section-header">Query Parameters</div>
+
+                    <div class="status-table">
+                        {% for key, value in data.request.query %}
+                            <div class="status-table-row">
+                                <div class="status-table-cell header">{{ key|escape }}</div>
+                                <div class="status-table-cell">{{ value|escape }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="status-section">
+            <div class="status-header">
+                <h2>Pod Information</h2>
+            </div>
+
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-item-header">Pod Name</div>
+                    <div class="status-item-value">{{ data.server.name|escape }}</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">Pod IP</div>
+                    <div class="status-item-value">
+                        {% for key, value in data.server.ips|escape %}
+                            <div class="ip-info">
+                                <span class="ip-label">{{ key|title }}:</span>
+                                <span class="ip-value">{{ value }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">Client IP</div>
+                    <div class="status-item-value">
+                        {% for key, value in data.client_ips|escape %}
+                            <div class="ip-info">
+                                <span class="ip-label">{{ key|title }}:</span>
+                                <span class="ip-value">{{ value }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">Pod Status</div>
+                    <div class="status-item-value">
+                        <span class="status-badge">Running</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="status-section">
+            <div class="status-header">
+                <h2>Runtime Environment</h2>
+            </div>
+
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-item-header">Server Software</div>
+                    <div class="status-item-value">{{ data.server.software|escape }}</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">Protocol</div>
+                    <div class="status-item-value">
+                        {{ data.server.protocol.application.name }}/{{ data.server.protocol.application.version }}
+                        over {{ data.server.protocol.transport.protocol }}
+                        {% if data.server.protocol.transport.secure %} (Secure){% endif %}
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">PHP Version</div>
+                    <div class="status-item-value">{{ data.server.php_version|escape }}</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-item-header">SAPI</div>
+                    <div class="status-item-value">{{ data.server.php_sapi|escape }}</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="status-section">
+            <div class="status-header">
+                <h2>Request Headers</h2>
+            </div>
+
+            <div class="status-table">
+                {% for key, value in data.headers %}
+                    <div class="status-table-row">
+                        <div class="status-table-cell header">{{ key|escape }}</div>
+                        <div class="status-table-cell">{{ value|escape }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock %}
