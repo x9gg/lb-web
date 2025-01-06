@@ -1,6 +1,6 @@
 FROM composer:latest AS composer
 FROM ghcr.io/roadrunner-server/roadrunner:2024 AS roadrunner
-FROM php:zts
+FROM php:8.4.2-zts
 
 # Install system dependencies
 #RUN apk add --no-cache \
@@ -17,21 +17,21 @@ WORKDIR /worker
 # Copy application files
 COPY ./ /worker
 
-# Install Composer
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-
-RUN /usr/bin/composer --version
+## Install Composer
+#COPY --from=composer /usr/bin/composer /usr/bin/composer
+#
+#RUN /usr/bin/composer --version
 
 # Install RoadRunner CLI globally
 COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 
 RUN rr --version
 
-# Install dependencies
-RUN /usr/bin/composer install --no-dev --no-scripts --no-autoloader
+## Install dependencies
+#RUN /usr/bin/composer install --no-dev --no-scripts --no-autoloader
 
 # Generate autoloader
-RUN /usr/bin/composer dump-autoload --no-dev --optimize
+#RUN /usr/bin/composer dump-autoload --no-dev --optimize
 
 # RoadRunner configuration
 COPY .rr.prod.yaml /etc/roadrunner/config.yaml
