@@ -20,7 +20,7 @@ COPY ./ /worker
 # Install Composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN composer --version
+RUN /usr/bin/composer --version
 
 # Install RoadRunner CLI globally
 COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
@@ -28,10 +28,10 @@ COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 RUN rr --version
 
 # Install dependencies
-RUN composer install --no-dev --no-scripts --no-autoloader
+RUN /usr/bin/composer install --no-dev --no-scripts --no-autoloader
 
 # Generate autoloader
-RUN composer dump-autoload --no-dev --optimize
+RUN /usr/bin/composer dump-autoload --no-dev --optimize
 
 # RoadRunner configuration
 COPY .rr.prod.yaml /etc/roadrunner/config.yaml
