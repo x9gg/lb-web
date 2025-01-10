@@ -97,7 +97,11 @@ class RequestHandler
         $ips = [];
 
         if (isset($this->headers['x-forwarded-for'])) {
-            $ips['forwarded'] = array_map('trim', explode(',', $this->headers['x-forwarded-for'][0]));
+            $allHeaders = is_array($this->headers['x-forwarded-for']) 
+                ? $this->headers['x-forwarded-for'] 
+                : [$this->headers['x-forwarded-for']];
+            
+            $ips['forwarded'] = implode(',', array_map('trim', explode(',', implode(',', $allHeaders))));
         }
 
         $serverParams = $this->request->getServerParams();
