@@ -21,6 +21,10 @@ http:
     allow: [ ".webmanifest", ".png" , '.ico', '.svg']
   pool:
     debug: true
+    num_workers:  8
+    max_jobs: 128
+    allocation_timeout: 180s
+    destroy_timeout: 180s
 
 logs:
   mode: development

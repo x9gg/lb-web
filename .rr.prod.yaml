@@ -14,14 +14,6 @@ server:
 
 
 http:
-  pool:
-    debug: false
-    num_workers: 1
-    max_jobs: 64
-    allocation_timeout: 180s
-    destroy_timeout: 120s
-
-workers:
   address: 0.0.0.0:8080
   middleware: ["static"]
   static:
@@ -29,11 +21,12 @@ workers:
     calculate_etag: false
     allow: [ ".webmanifest", ".png" , '.ico', '.svg']
   pool:
-    num_workers:  8
-    max_jobs: 128
+    debug: false
+    num_workers: 1
+    max_jobs: 64
     allocation_timeout: 180s
-    destroy_timeout: 180s
-    
+    destroy_timeout: 120s
+
 logs:
   mode: production
   level: error
