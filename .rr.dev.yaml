@@ -3,6 +3,8 @@ version: "3"
 include:
   - .rr.base.yaml
 
+http.static.dir: "./src/public"
+
 pool:
     debug: true
     
