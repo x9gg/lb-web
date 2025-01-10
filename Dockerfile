@@ -18,7 +18,6 @@ COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 RUN rr --version
 
 # RoadRunner configuration
-COPY .rr.base.yaml /etc/roadrunner/.rr.base.yaml
 COPY .rr.prod.yaml /etc/roadrunner/config.yaml
 
 EXPOSE 8080

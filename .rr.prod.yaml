@@ -1,10 +1,17 @@
 version: "3"
 
-include:
-  - .rr.yaml
 
 server:
   command: "php /worker/psr-worker.php"
+  env:
+    APP_HEADER_TRACE_ID_NAME: "X-SERVER-TRACE-ID"
+    APP_HEADER_CDN_VERIFICATION_API_KEY_NAME: "X-CDN-VERIFICATION-API-KEY"
+    APP_HEADER_CDN_VERIFICATION_API_SECRET_NAME: "X-CDN-VERIFICATION-API-SECRET"
+    APP_ENV_SITE_TITLE: "X9GG/lb-web"
+    APP_ENV_SITE_COPYRIGHT_YEAR: "2025"
+    APP_ENV_SITE_COPYRIGHT_NAME: "X9GG LLC"
+    APP_ENV_SITE_COPYRIGHT_URL: "https://x9gg.com"
+
 
 http:
   pool:
@@ -15,6 +22,12 @@ http:
     destroy_timeout: 120s
 
 workers:
+  address: 0.0.0.0:8080
+  middleware: ["static"]
+  static:
+    dir: "/worker/src/public"
+    calculate_etag: false
+    allow: [ ".webmanifest", ".png" , '.ico', '.svg']
   pool:
     num_workers:  8
     max_jobs: 128
@@ -23,3 +36,8 @@ workers:
     
 logs:
   mode: production
+  level: error
+  encoding: console
+  output: stderr
+  err_output: stderr
+

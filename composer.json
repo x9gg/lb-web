@@ -16,6 +16,6 @@
     }
   },
   "scripts": {
-    "run:develop": "/opt/homebrew/bin/rr serve -c .rr.yaml"
+    "run:develop": "/opt/homebrew/bin/rr serve -c .rr.dev.yaml"
   }
 }
