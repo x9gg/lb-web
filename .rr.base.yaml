@@ -16,6 +16,7 @@ http:
   address: 0.0.0.0:8080
   middleware: ["static"]
   static:
+    dir: "./src/public"
     calculate_etag: false
     allow: [ ".webmanifest", ".png" , '.ico', '.svg']
 
