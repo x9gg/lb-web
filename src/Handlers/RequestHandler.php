@@ -83,7 +83,9 @@ class RequestHandler
             $processed[$name] = implode(', ', $values);
         }
 
-        return $processed;
+        
+
+        return ksort($processed);
     }
 
     private function getTraceId(): ?string
