@@ -19,14 +19,11 @@ http:
     dir: "./src/public"
     calculate_etag: false
     allow: [ ".webmanifest", ".png" , '.ico', '.svg']
-  pool:
-    debug: true
 
 logs:
-  mode: development
-  level: debug
   encoding: console
   output: stderr
   err_output: stderr
+
 
 
