@@ -14,6 +14,7 @@ The deployed as a docker image, and it should include the following environment 
 - `APP_ENV_SITE_COPYRIGHT_YEAR`
 - `APP_ENV_SITE_COPYRIGHT_NAME` 
 - `APP_ENV_SITE_COPYRIGHT_URL`
+- `APP_VERSION` is set by github action with the build commit
 
 ## running on dev
 ### requirements

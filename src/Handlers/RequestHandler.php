@@ -57,7 +57,8 @@ class RequestHandler
                 'APP_ENV_SITE_COPYRIGHT_YEAR' => getenv('APP_ENV_SITE_COPYRIGHT_YEAR'),
                 'APP_ENV_SITE_COPYRIGHT_NAME' => getenv('APP_ENV_SITE_COPYRIGHT_NAME'),
                 'APP_ENV_SITE_COPYRIGHT_URL' => getenv('APP_ENV_SITE_COPYRIGHT_URL'),
-            ]
+            ],
+            'version' => $this->getAppVersion()
         ];
 
         if ($error) {
@@ -215,5 +216,9 @@ class RequestHandler
                 'alt_svc' => $this->headers['alt-svc'][0] ?? null,
             ]
         ];
+    }
+
+    private function getAppVersion() {
+        return getenv('APP_VERSION') ?: 'dev';
     }
 }

@@ -8,6 +8,10 @@ RUN composer install --optimize-autoloader --no-dev --no-scripts --ignore-platfo
 FROM ghcr.io/roadrunner-server/roadrunner:2024 AS roadrunner
 FROM php:8.4-alpine AS production
 
+ARG GITHUB_COMMIT_SHA
+
+ENV APP_VERSION=${GITHUB_COMMIT_SHA}
+
 WORKDIR /app
     
 COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
