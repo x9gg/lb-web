@@ -225,7 +225,7 @@ class RequestHandler
             'v%s [%s] built %s',
             getenv('APP_VERSION_SHORT') ?: 'dev',
             getenv('APP_VERSION') ?: 'dev',
-            getenv('APP_BUILD_TIME') ? (new DateTime(getenv('APP_BUILD_TIME')))->format('Y-m-d H:i:s T') : 'dev'
+            getenv('APP_BUILD_TIME') ? (new \DateTime(getenv('APP_BUILD_TIME')))->format('Y-m-d H:i:s T') : 'dev'
         );
     }
 }
