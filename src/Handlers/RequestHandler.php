@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Handlers;
+
 use Psr\Http\Message\ServerRequestInterface;
 
 class RequestHandler
@@ -99,10 +100,10 @@ class RequestHandler
         $ips = [];
 
         if (isset($this->headers['x-forwarded-for'])) {
-            $allHeaders = is_array($this->headers['x-forwarded-for']) 
-                ? $this->headers['x-forwarded-for'] 
+            $allHeaders = is_array($this->headers['x-forwarded-for'])
+                ? $this->headers['x-forwarded-for']
                 : [$this->headers['x-forwarded-for']];
-            
+
             $ips['forwarded'] = implode(',', array_map('trim', explode(',', implode(',', $allHeaders))));
         }
 
@@ -140,20 +141,20 @@ class RequestHandler
     private function getProtocolInfo(): array
     {
         $serverParams = $this->request->getServerParams();
-        
+
         $protocol = 'HTTP';
         $transport = 'TCP';
         $alpn = null;
         $cipher = null;
-        
+
         // base protocol
         if (isset($serverParams['SERVER_PROTOCOL'])) {
             $protocol = strstr($serverParams['SERVER_PROTOCOL'], '/', true) ?: 'HTTP';
         }
 
-        $isHttps = $this->request->getUri()->getScheme() === 'https'
-            || ($serverParams['HTTPS'] ?? '') === 'on'
-            || (isset($this->headers['x-forwarded-proto']) && strtolower($this->headers['x-forwarded-proto'][0]) === 'https');
+        $isHttps = $this->request->getUri()->getScheme() === 'https' ||
+            ($serverParams['HTTPS'] ?? '') === 'on' ||
+            (isset($this->headers['x-forwarded-proto']) && strtolower($this->headers['x-forwarded-proto'][0]) === 'https');
 
         // tls info
         if ($isHttps && isset($serverParams['SSL_PROTOCOL'])) {
@@ -162,8 +163,8 @@ class RequestHandler
         }
 
         // http2
-        if (isset($serverParams['HTTP2']) || 
-            (isset($this->headers['x-firefox-spdy']) && $this->headers['x-firefox-spdy'][0] === 'h2')) {
+        if (isset($serverParams['HTTP2']) ||
+                (isset($this->headers['x-firefox-spdy']) && $this->headers['x-firefox-spdy'][0] === 'h2')) {
             $protocol = 'HTTP/2';
             $transport = 'TCP';
         }
@@ -218,7 +219,13 @@ class RequestHandler
         ];
     }
 
-    private function getAppVersion() {
-        return getenv('APP_VERSION') ?: 'dev';
+    private function getAppVersion()
+    {
+        return sprintf(
+            'v%s [%s] built %s',
+            getenv('APP_VERSION_SHORT') ?: 'dev',
+            getenv('APP_VERSION') ?: 'dev',
+            getenv('APP_BUILD_TIME') ? (new DateTime(getenv('APP_BUILD_TIME')))->format('Y-m-d H:i:s T') : 'dev'
+        );
     }
 }

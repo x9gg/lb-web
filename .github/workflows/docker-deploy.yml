@@ -12,17 +12,17 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
-      - name: Set up PHP and composer
-        uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
-          extensions: sockets, zip
-          tools: composer:v2
-
-      - name: Install Dependencies
+          fetch-depth: 0
+      
+      
+      - name: Set build variables
+        id: vars
         run: |
-          composer install --optimize-autoloader --no-dev --no-scripts
+          echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "SHA_FULL=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "BUILD_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -37,3 +37,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: x9gg/lb-web:latest
+          build-args: |
+            DOCKER_COMMIT=${{ steps.vars.outputs.SHA_FULL }}
+            DOCKER_COMMIT_SHORT=${{ steps.vars.outputs.SHA_SHORT }}
+            BUILD_TIMESTAMP=${{ steps.vars.outputs.BUILD_TIME }}

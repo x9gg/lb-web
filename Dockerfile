@@ -8,9 +8,14 @@ RUN composer install --optimize-autoloader --no-dev --no-scripts --ignore-platfo
 FROM ghcr.io/roadrunner-server/roadrunner:2024 AS roadrunner
 FROM php:8.4-alpine AS production
 
-ARG GITHUB_COMMIT_SHA
+ARG DOCKER_COMMIT
+ARG DOCKER_COMMIT_SHORT
+ARG BUILD_TIMESTAMP
 
-ENV APP_VERSION=${GITHUB_COMMIT_SHA}
+# Set environment variables
+ENV APP_VERSION=${DOCKER_COMMIT}
+ENV APP_VERSION_SHORT=${DOCKER_COMMIT_SHORT}
+ENV APP_BUILD_TIME=${BUILD_TIMESTAMP}
 
 WORKDIR /app
     
