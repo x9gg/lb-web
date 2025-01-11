@@ -1,26 +1,22 @@
 FROM composer:latest AS composer
+
+WORKDIR /app
+COPY composer.* ./
+    
+RUN composer install --optimize-autoloader --no-dev --no-scripts --ignore-platform-req=ext-sockets
+
 FROM ghcr.io/roadrunner-server/roadrunner:2024 AS roadrunner
-FROM php:8.4.2-zts
+FROM php:8.4-alpine AS production
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-
-RUN install-php-extensions sockets
-
-# Set working directory
-WORKDIR /worker
-
-# Copy application files
-COPY ./ /worker
-
-# Install RoadRunner CLI globally
+WORKDIR /app
+    
 COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
-
-RUN rr --version
-
-# RoadRunner configuration
 COPY .rr.prod.yaml /etc/roadrunner/config.yaml
 
-EXPOSE 8080
-
-# Run RoadRunner
+COPY --from=composer /app/ ./
+COPY src/ ./src/
+COPY LICENSE ./
+COPY psr-worker.php ./
+    
+EXPOSE 8080    
 CMD ["rr", "serve", "-c", "/etc/roadrunner/config.yaml"]

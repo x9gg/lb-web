@@ -2,7 +2,7 @@ version: "3"
 
 
 server:
-  command: "php /worker/psr-worker.php"
+  command: "php /app/psr-worker.php"
   env:
     APP_HEADER_TRACE_ID_NAME: "X-SERVER-TRACE-ID"
     APP_HEADER_CDN_VERIFICATION_API_KEY_NAME: "X-CDN-VERIFICATION-API-KEY"
@@ -17,7 +17,7 @@ http:
   address: 0.0.0.0:8080
   middleware: ["static"]
   static:
-    dir: "/worker/src/public"
+    dir: "/app/src/public"
     calculate_etag: false
     allow: [ ".webmanifest", ".png" , '.ico', '.svg']
   pool:
