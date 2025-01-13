@@ -1,21 +1,20 @@
 :root {
-    /* Enhanced color palette with better contrast ratios */
     --bg-color: #0f1115;
     --surface-color: #1a1d24;
     --border-color: #2d3139;
-    --text-primary: #ffffff;    /* Increased contrast */
-    --text-secondary: #b8c0cc;  /* Brightened for better readability */
-    --text-muted: #8b92a1;     /* Adjusted for WCAG AA compliance */
-    --accent-color: #4891ff;    /* Brightened blue for better contrast */
-    --success-color: #3dd9a3;   /* Adjusted green */
-    --danger-color: #ff8585;    /* Brightened red */
-    --warning-color: #ffd044;   /* Adjusted yellow for better visibility */
+    --text-primary: #fff;
+    --text-secondary: #b8c0cc;
+    --text-muted: #8b92a1;
+    --accent-color: #4891ff;
+    --success-color: #3dd9a3;
+    --danger-color: #ff8585;
+    --warning-color: #ffd044
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 body {
@@ -24,44 +23,44 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    font-size: 16px; /* Ensuring base font size is accessible */
+    font-size: 16px
 }
 
 .console {
     min-height: 100vh;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem
 }
 
 .console-header {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color)
 }
 
 .console-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--text-primary)
 }
 
 .console-meta {
     font-size: 1rem;
     color: var(--text-secondary);
-    margin-top: 0.5rem;
+    margin-top: .5rem
 }
 
 .console-body {
     display: grid;
-    gap: 2rem;
+    gap: 2rem
 }
 
 .status-section {
     background: var(--surface-color);
     border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    overflow: hidden;
+    border-radius: .5rem;
+    overflow: hidden
 }
 
 .status-header {
@@ -69,144 +68,139 @@ body {
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center
 }
 
 .status-header h2 {
     font-size: 1rem;
     font-weight: 700;
     color: var(--text-secondary);
-    letter-spacing: 0.05em;
+    letter-spacing: .05em
 }
 
 .status-refresh {
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    font-size: .75rem;
+    color: var(--text-muted)
 }
 
 .status-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1px;
-    background-color: var(--border-color);
+    background-color: var(--border-color)
 }
 
 .status-item {
     padding: 1rem;
-    background-color: var(--surface-color);
+    background-color: var(--surface-color)
 }
 
 .status-item-header {
-    font-size: 0.75rem;
+    font-size: .75rem;
     color: var(--text-muted);
-    margin-bottom: 0.5rem;
+    margin-bottom: .5rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: .05em
 }
 
 .status-item-value {
     color: var(--text-primary);
-    font-size: 0.875rem;
+    font-size: .875rem
 }
 
 .status-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.375rem 1rem;
-    background-color: rgba(61, 217, 163, 0.15);
+    padding: .375rem 1rem;
+    background-color: #3dd9a326;
     color: var(--success-color);
     border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: .875rem;
+    font-weight: 600
 }
 
 .status-table {
     display: grid;
     gap: 1px;
-    background-color: var(--border-color);
+    background-color: var(--border-color)
 }
 
 .status-table-row {
     display: grid;
     grid-template-columns: 200px 1fr;
-    background-color: var(--surface-color);
+    background-color: var(--surface-color)
 }
 
 .status-table-cell {
-    padding: 0.875rem 1rem;
-    font-size: 0.9375rem;
-    color: var(--text-primary);
+    padding: .875rem 1rem;
+    font-size: .9375rem;
+    color: var(--text-primary)
 }
 
 .status-table-cell.header {
     color: var(--text-secondary);
-    font-size: 0.8125rem;
+    font-size: .8125rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: .05em
 }
 
 .error-container {
-    min-height: calc(100vh - 60px); /* Adjusted for footer */
+    min-height: calc(100vh - 60px);
     padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto
 }
 
 .error-header {
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem
 }
-/* Error status badge */
+
 .status-badge-error {
-    background-color: rgba(255, 133, 133, 0.15);
-    color: var(--danger-color);
+    background-color: #ff858526;
+    color: var(--danger-color)
 }
 
-/* Warning status badge */
 .status-badge-warning {
-    background-color: rgba(255, 208, 68, 0.15);
-    color: var(--warning-color);
+    background-color: #ffd04426;
+    color: var(--warning-color)
 }
 
-/* Additional status badges for different states */
 .status-badge-info {
-    background-color: rgba(59, 130, 246, 0.1);
-    color: var(--accent-color);
+    background-color: #3b82f61a;
+    color: var(--accent-color)
 }
 
-/* When system is completely down or critical error */
 .status-badge-critical {
-    background-color: rgba(239, 68, 68, 0.2);
+    background-color: #ef444433;
     color: var(--danger-color);
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite
 }
 
-/* Optional: Add styles for status text in error state */
 .status-item-value.error {
-    color: var(--danger-color);
+    color: var(--danger-color)
 }
 
-/* Optional: Add styles for status text in warning state */
 .status-item-value.warning {
-    color: var(--warning-color);
+    color: var(--warning-color)
 }
 
-/* Optional: Add a border variant for error states in status items */
 .status-item.error {
-    border-left: 2px solid var(--danger-color);
+    border-left: 2px solid var(--danger-color)
 }
+
 .error-indicator {
     display: flex;
     align-items: center;
     gap: 1rem;
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: .75rem 1rem;
     background: var(--surface-color);
     border: 1px solid var(--border-color);
-    border-radius: 0.375rem;
+    border-radius: .375rem
 }
 
 .error-indicator-dot {
@@ -214,56 +208,56 @@ body {
     height: 8px;
     background-color: var(--danger-color);
     border-radius: 50%;
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite
 }
 
 .error-title {
     color: var(--text-primary);
-    font-size: 0.875rem;
+    font-size: .875rem
 }
 
 .error-code {
     color: var(--danger-color);
-    font-size: 0.875rem;
-    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+    font-size: .875rem;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace
 }
 
 .back-link {
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: .5rem;
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 150ms ease;
+    font-size: .875rem;
+    transition: color 150ms ease
 }
 
 .back-link:hover {
-    color: var(--text-primary);
+    color: var(--text-primary)
 }
 
 .back-icon {
     font-size: 1.25rem;
-    line-height: 1;
+    line-height: 1
 }
 
 .error-details {
     background: var(--surface-color);
     border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    overflow: hidden;
+    border-radius: .5rem;
+    overflow: hidden
 }
 
 .error-trace-content {
-    padding: 1.5rem;
+    padding: 1.5rem
 }
 
 .error-message {
     color: var(--text-primary);
-    font-size: 0.875rem;
+    font-size: .875rem;
     margin-bottom: 1.5rem;
-    line-height: 1.5;
+    line-height: 1.5
 }
 
 .error-info {
@@ -272,58 +266,58 @@ body {
     gap: 1rem;
     padding: 1rem;
     background: var(--bg-color);
-    border-radius: 0.375rem;
+    border-radius: .375rem
 }
 
-.error-trace-id, .admin-contact {
+.error-trace-id,
+.admin-contact {
     display: flex;
-    gap: 0.75rem;
-    align-items: center;
+    gap: .75rem;
+    align-items: center
 }
 
-.trace-label, .admin-label {
+.trace-label,
+.admin-label {
     color: var(--text-secondary);
-    font-size: 0.75rem;
-    min-width: 70px;
+    font-size: .75rem;
+    min-width: 70px
 }
 
 .trace-value {
     color: var(--text-primary);
-    font-size: 0.75rem;
-    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+    font-size: .75rem;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace
 }
 
 .admin-email {
     color: var(--accent-color);
     text-decoration: none;
-    font-size: 0.875rem;
-    transition: opacity 150ms ease;
+    font-size: .875rem;
+    transition: opacity 150ms ease
 }
 
 .admin-email:hover {
-    opacity: 0.8;
+    opacity: .8
 }
 
-/* Footer Styles */
 .site-footer {
     padding: 1rem;
     text-align: center;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color)
 }
 
 .copyright {
     color: var(--text-secondary);
-    font-size: 0.875rem;
+    font-size: .875rem;
     font-family: "Inter", -apple-system, system-ui, sans-serif;
-    letter-spacing: 0.02em;
+    letter-spacing: .02em
 }
 
 .copyright-link {
     color: var(--text-secondary);
     text-decoration: underline;
     font-weight: 600;
-    padding: 0.25rem;
-
+    padding: .25rem
 }
 
 .copyright-link:hover,
@@ -331,189 +325,193 @@ body {
     color: var(--accent-color);
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 button:focus,
 a:focus {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .4
+    }
+
+    100% {
+        opacity: 1
+    }
 }
 
 @media (max-width: 640px) {
     .error-container {
-        padding: 1rem;
+        padding: 1rem
     }
 
     .error-indicator {
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: .5rem
     }
 
     .back-link {
         margin-left: 0;
-        margin-top: 0.5rem;
+        margin-top: .5rem;
         width: 100%;
-        justify-content: flex-end;
+        justify-content: flex-end
     }
 
     .error-info {
-        flex-direction: column;
+        flex-direction: column
     }
 }
 
 @media (max-width: 768px) {
     body {
-        font-size: 15px;
+        font-size: 15px
     }
 
     .console {
-        padding: 1rem;
+        padding: 1rem
     }
 
     .status-table-row {
         grid-template-columns: 1fr;
-        gap: 0.25rem;
+        gap: .25rem
     }
 
     .status-table-cell {
-        padding: 0.75rem;
-        font-size: 0.875rem;
+        padding: .75rem;
+        font-size: .875rem
     }
 
     .status-table-cell.header {
-        background-color: rgba(255, 255, 255, 0.02);
+        background-color: #ffffff05
     }
 }
-
-
-/* Add these to your existing CSS */
 
 .console-meta {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: .5rem
 }
 
 .trace-separator {
-    color: var(--border-color);
+    color: var(--border-color)
 }
 
 .trace-id {
     font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
-    color: var(--text-muted);
+    color: var(--text-muted)
 }
 
-/* Error styles */
 .error-content {
-    padding: 1.5rem;
+    padding: 1.5rem
 }
 
 .error-message {
     color: var(--danger-color);
     font-size: 1.125rem;
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1.6
 }
 
 .error-details {
     background: var(--bg-color);
-    border-radius: 0.375rem;
-    padding: 1rem;
+    border-radius: .375rem;
+    padding: 1rem
 }
 
 .error-detail-item {
     display: flex;
     gap: 1rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.875rem;
+    margin-bottom: .75rem;
+    font-size: .875rem
 }
 
 .error-label {
     color: var(--text-muted);
-    min-width: 80px;
+    min-width: 80px
 }
 
 .error-value {
     color: var(--text-primary);
-    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace
 }
 
 .error-stack {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color)
 }
 
 .error-trace-item {
-    margin-top: 0.75rem;
-    padding: 0.75rem;
+    margin-top: .75rem;
+    padding: .75rem;
     background: var(--surface-color);
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
+    border-radius: .25rem;
+    font-size: .875rem
 }
 
 .trace-location {
     color: var(--text-muted);
-    margin-bottom: 0.25rem;
-    font-size: 0.75rem;
+    margin-bottom: .25rem;
+    font-size: .75rem
 }
 
 .trace-call {
     color: var(--text-primary);
-    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace
 }
 
 .ip-info {
-    margin: 2px 0;
+    margin: 2px 0
 }
 
 .ip-label {
     font-weight: 600;
     color: var(--text-secondary);
-    margin-right: 0.5rem;
+    margin-right: .5rem
 }
 
 .ip-value {
     color: var(--text-primary);
-    font-family: monospace;
+    font-family: monospace
 }
-
 
 .query-param {
     margin: 4px 0;
     display: flex;
     align-items: baseline;
-    gap: 8px;
+    gap: 8px
 }
 
 .query-key {
     color: var(--text-secondary);
     font-weight: 500;
-    min-width: 100px;
+    min-width: 100px
 }
 
 .query-value {
     font-family: monospace;
-    word-break: break-all;
+    word-break: break-all
 }
-.url-section, .query-params-section {
+
+.url-section,
+.query-params-section {
     margin: 1.5rem 0;
     padding: 1rem;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
-.url-header, .query-params-section-headers{
+.url-header,
+.query-params-section-headers {
     font-weight: 500;
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    margin-bottom: .5rem
 }
-
-
